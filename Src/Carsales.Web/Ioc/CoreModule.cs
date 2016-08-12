@@ -24,11 +24,6 @@ namespace Carsales.Web.Ioc
             builder.Register(x => Bolt.Logger.NLog.LoggerFactory.Create("Carsales.Web"))
                 .As<ILogger>() 
                 .SingleInstance();
-
-            // builder.RegisterGeneric(typeof(BookWorm.Web.Features.Shared.CategoryMenu.LoadCategoryMenuOnPageLoadEventHandler<>)).As(typeof(Bolt.RequestBus.IAsyncEventHandler<>));
-            // builder.RegisterGeneric(typeof(BookWorm.Web.Features.Shared.LoginStatus.LoadLoginStatusOnPageLoadEventHandler<>)).As(typeof(Bolt.RequestBus.IAsyncEventHandler<>));
-            // builder.RegisterGeneric(typeof(BookWorm.Web.Features.Shared.SavedBooks.LoadSavedBooksOnPageLoadEventHandler<>)).As(typeof(Bolt.RequestBus.IAsyncEventHandler<>));
-            // builder.RegisterGeneric(typeof(BookWorm.Web.Features.Shared.Cart.LoadCartOnPageLoadEventHandler<>)).As(typeof(Bolt.RequestBus.IAsyncEventHandler<>));
         }
     }
 
