@@ -6,7 +6,8 @@ namespace Carsales.Web.Infrastructure.ViewEngines
     {
         private readonly string[] viewLocationFormats = {
             "~/Features/{1}/views/{0}.cshtml",
-            "~/Features/Shared/{1}/Views/{0}.cshtml"
+            "~/Features/Shared/{1}/Views/{0}.cshtml",
+            "~/Features/Shared/Views/{0}.cshtml"
         };
 
         private readonly string[] areaLocationFormats = {

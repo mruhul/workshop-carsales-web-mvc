@@ -22,7 +22,7 @@ namespace Carsales.Web.Ioc
             .SingleInstance();
 
             builder.Register(x => Bolt.Logger.NLog.LoggerFactory.Create("Carsales.Web"))
-                .As<Bolt.Logger.ILogger>() 
+                .As<ILogger>() 
                 .SingleInstance();
 
             // builder.RegisterGeneric(typeof(BookWorm.Web.Features.Shared.CategoryMenu.LoadCategoryMenuOnPageLoadEventHandler<>)).As(typeof(Bolt.RequestBus.IAsyncEventHandler<>));

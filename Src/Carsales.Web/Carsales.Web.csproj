@@ -263,6 +263,9 @@
     <Content Include="NLog.config" />
     <Content Include="Features\Home\Views\Index.cshtml" />
     <Content Include="Features\Shared\Views\_Layout.cshtml" />
+    <Content Include="Features\Shared\Views\_LayoutBasic.cshtml" />
+    <Content Include="Features\Shared\Views\_Header.cshtml" />
+    <Content Include="Features\Shared\Views\_Footer.cshtml" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <PropertyGroup>

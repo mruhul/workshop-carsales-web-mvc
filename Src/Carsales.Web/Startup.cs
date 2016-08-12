@@ -21,11 +21,14 @@ namespace Carsales.Web
             builder.RegisterControllers(typeof(Startup).Assembly);
 
             builder.RegisterAssemblyModules(typeof(Startup).Assembly,
-                typeof(Bolt.RequestBus.IDependencyResolver).Assembly);
+                typeof(Bolt.RequestBus.Autofac.DependencyResolver).Assembly);
             
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
-
+            
+            app.UseAutofacMiddleware(container);
+            app.UseAutofacMvc();
+            
             var startUpTasks = container.Resolve<IEnumerable<IStartUpTask>>();
             startUpTasks.ForEach(x =>
             {
@@ -38,9 +41,6 @@ namespace Carsales.Web
                     container.Resolve<ILogger>().Error(e, e.Message);
                 }
             });
-            
-            app.UseAutofacMiddleware(container);
-            app.UseAutofacMvc();
         }
     }
 }

@@ -1,13 +1,20 @@
-﻿<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
-</head>
-<body>
-    <div>
-        @RenderBody()
-    </div>
-</body>
-</html>
+﻿@{
+    Layout = "~/Features/Shared/Views/_LayoutBasic.cshtml";
+}
+@if (IsSectionDefined("Style"))
+{
+    @RenderSection("Style")
+}
+@{
+    Html.RenderPartial("_Header");
+}
+<section>
+    @RenderBody()
+</section>
+@{
+    Html.RenderPartial("_Footer");
+}
+@if (IsSectionDefined("BottomScript"))
+{
+    @RenderSection("BottomScript")
+}
