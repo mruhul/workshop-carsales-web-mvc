@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Bolt.Logger;
 
@@ -6,8 +7,8 @@ namespace Carsales.Web.Infrastructure.ErrorSafeHelpers
 {
     public interface IErrorSafeExecutor
     {
-        Task<Carsales.Web.Infrastructure.ErrorSafeHelpers.IErrorSafeResponse> ExecuteAsync(Func<Task> action);
-        Task<Carsales.Web.Infrastructure.ErrorSafeHelpers.IErrorSafeResponse<T>> ExecuteAsync<T>(Func<Task<T>> action);
+        Task<IErrorSafeResponse> ExecuteAsync(Func<Task> action);
+        Task<IErrorSafeResponse<T>> ExecuteAsync<T>(Func<Task<T>> action);
     }
 
     public class ErrorSafe : IErrorSafeExecutor
@@ -24,6 +25,7 @@ namespace Carsales.Web.Infrastructure.ErrorSafeHelpers
             return new ErrorSafe(logger);
         }
 
+        [DebuggerStepThrough]
         public async Task<IErrorSafeResponse> ExecuteAsync(Func<Task> action)
         {
             try
@@ -39,6 +41,8 @@ namespace Carsales.Web.Infrastructure.ErrorSafeHelpers
                 return ErrorSafeResponse.Failed();
             }
         }
+
+        [DebuggerStepThrough]
         public async Task<IErrorSafeResponse<T>> ExecuteAsync<T>(Func<Task<T>> action)
         {
             try

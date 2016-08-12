@@ -238,7 +238,7 @@
     <Compile Include="Infrastructure\StartupTasks\IStartupTask.cs" />
     <Compile Include="Infrastructure\Stores\ContextStore.cs" />
     <Compile Include="Infrastructure\Stores\ContextStoreExtensions.cs" />
-    <Compile Include="Infrastructure\ViewEngines\Class1.cs" />
+    <Compile Include="Infrastructure\ViewEngines\FeatureBasedRazorViewEngine.cs" />
     <Compile Include="Ioc\ConventionBasedModule.cs" />
     <Compile Include="Ioc\CoreModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -255,10 +255,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Views\Home\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="Features\Web.config" />

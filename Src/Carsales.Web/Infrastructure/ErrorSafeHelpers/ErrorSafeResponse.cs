@@ -13,7 +13,7 @@ namespace Carsales.Web.Infrastructure.ErrorSafeHelpers
 
     public class ErrorSafeResponse : IErrorSafeResponse
     {
-        public ErrorSafeResponse(bool succeed)
+        private ErrorSafeResponse(bool succeed)
         {
             SucceedStatus = succeed;
         }
