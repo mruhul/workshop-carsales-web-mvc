@@ -264,7 +264,6 @@
     <Content Include="Features\Shared\Views\_LayoutBasic.cshtml" />
     <Content Include="Features\Shared\Views\_Header.cshtml" />
     <Content Include="Features\Shared\Views\_Footer.cshtml" />
-    <None Include="Project_Readme.html" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
