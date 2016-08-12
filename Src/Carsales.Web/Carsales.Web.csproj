@@ -226,7 +226,6 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteSetupTask.cs" />
     <Compile Include="App_Start\ViewEngineSetupTask.cs" />
-    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
