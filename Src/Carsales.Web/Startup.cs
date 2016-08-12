@@ -29,6 +29,11 @@ namespace Carsales.Web
             app.UseAutofacMiddleware(container);
             app.UseAutofacMvc();
             
+            RunStartupTasks(container);
+        }
+
+        private static void RunStartupTasks(IContainer container)
+        {
             var startUpTasks = container.Resolve<IEnumerable<IStartUpTask>>();
             startUpTasks.ForEach(x =>
             {
