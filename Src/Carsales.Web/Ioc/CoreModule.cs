@@ -4,6 +4,7 @@ using Bolt.Logger;
 using Bolt.RestClient;
 using Bolt.RestClient.Builders;
 using Bolt.RestClient.Dto;
+using Bolt.Serializer;
 using Bolt.Serializer.Json;
 using Carsales.Web.Infrastructure.RestClientLog;
 
@@ -13,8 +14,10 @@ namespace Carsales.Web.Ioc
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<JsonSerializer>().As<ISerializer>().SingleInstance();
+
             builder.Register(x => RestClientBuilder.New()
-                .WithSerializer(new JsonSerializer())
+                .WithSerializer(x.Resolve<ISerializer>())
                 .WithLogger(Bolt.Logger.NLog.LoggerFactory.Create("Bolt.RestClient"))
                 .WithTimeTakenNotifier(new LogBasedReportTimeTaken(Bolt.Logger.NLog.LoggerFactory.Create("Bolt.RestClient")))
                 .Build()
