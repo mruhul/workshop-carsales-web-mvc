@@ -37,7 +37,7 @@ namespace Carsales.Web.Infrastructure.AssetMappers
         {
             if (url.IsEmpty()) return string.Empty;
 
-            return assetDomain.HasValue() ? $"{assetDomain}/{url}" : url;
+            return assetDomain.HasValue() ? $"{assetDomain}/{url.TrimStart('/')}" : url;
         }
     }
 }
