@@ -1,7 +1,6 @@
 using System;
 using Autofac;
 using Carsales.Web.Infrastructure.Attributes;
-using Carsales.Web.Infrastructure.StartupTasks;
 
 namespace Carsales.Web.Ioc
 {
