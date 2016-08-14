@@ -11,8 +11,8 @@ var stripLoader = {
 var s3 = new S3Plugin({
     // s3Options are required 
     s3Options: {
-        accessKeyId: 'AKIAJ3MQUVAK72Z22OQA',
-        secretAccessKey: 'K4wRtKksOweg1fFA9Tfww6Iu3/gomuSBdMTh1VyE',
+        accessKeyId: '<your key>',
+        secretAccessKey: '<your secret>',
         region: 'ap-southeast-2'
     },
     s3UploadOptions: {

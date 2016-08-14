@@ -1,1 +1,0 @@
-﻿require('../../Shared/Assets/common');

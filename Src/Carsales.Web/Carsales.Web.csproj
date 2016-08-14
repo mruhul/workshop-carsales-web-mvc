@@ -226,7 +226,6 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteSetupTask.cs" />
     <Compile Include="App_Start\ViewEngineSetupTask.cs" />
-    <Compile Include="Features\Home\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -250,9 +249,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
-    <Content Include="Features\Home\Assets\home-page.js" />
-    <Content Include="Features\Shared\Assets\common.js" />
-    <Content Include="Features\Shared\Assets\Img\logo.png" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -290,21 +286,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="typings.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Features\Home\Views\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Features\Shared\Assets\Css\variables.scss" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Features\Shared\Assets\Css\reset.scss" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Features\Shared\Assets\Css\common.scss" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Features\Shared\Assets\Css\header.scss" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

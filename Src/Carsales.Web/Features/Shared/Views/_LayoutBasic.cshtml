@@ -2,9 +2,18 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
+    @if (IsSectionDefined("Head"))
+    {
+        @RenderSection("Head")
+    }
+    else
+    {
+        <title>@ViewBag.Title</title>
+        <meta name="viewport" content="width=device-width" />
+    }
+
     @RenderSection("Styles", false)
+    @RenderSection("TopScripts", false)
 </head>
 <body>
     @RenderBody()

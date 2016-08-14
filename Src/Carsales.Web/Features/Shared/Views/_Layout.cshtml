@@ -1,9 +1,13 @@
 ﻿@{
     Layout = "~/Features/Shared/Views/_LayoutBasic.cshtml";
 }
-@if (IsSectionDefined("Style"))
+@if (IsSectionDefined("Head"))
 {
-    @RenderSection("Style")
+    @RenderSection("Head")
+}
+@if (IsSectionDefined("Styles"))
+{
+    @RenderSection("Styles")
 }
 @{
     Html.RenderPartial("_Header");
