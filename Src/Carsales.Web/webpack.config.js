@@ -9,10 +9,12 @@ var glob = require('glob'),
     AssetsPlugin = require('assets-webpack-plugin'),
     assetsPluginInstance = new AssetsPlugin();
 
+var isProd = (process.env.NODE_ENV === 'prod');
+
 var config = {
     entryPointMatch: './features/**/*-page.{js,ts}', // anything ends with -page.js
     outputPath: path.join(__dirname, 'dist'),
-    publicPath: '/dist/'
+    publicPath: isProd ? './' :  '/dist/'
 }
 
 function getEntryFiles(){
@@ -32,7 +34,6 @@ function getEntryFiles(){
     return entries;
 }
 
-var isProd = (process.env.NODE_ENV === 'prod');
 
 module.exports = {
     entry: getEntryFiles(),
@@ -112,7 +113,7 @@ module.exports = {
             verbose: true, 
             dry: false
         }),
-        new ExtractTextPlugin(isProd ? '[name]-[chunkhash].css' : '[name].css')
+        new ExtractTextPlugin(isProd ? '[name]-[chunkhash].css' : '[name].css') 
     ],
     devtool:"source-map"
 };

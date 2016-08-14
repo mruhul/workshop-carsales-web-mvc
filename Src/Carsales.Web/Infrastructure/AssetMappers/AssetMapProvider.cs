@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Bolt.Common.Extensions;
 using Carsales.Web.Infrastructure.Attributes;
 
@@ -14,30 +15,47 @@ namespace Carsales.Web.Infrastructure.AssetMappers
     [AutoBindSingleton]
     public class AssetMapProvider : IAssetMapProvider
     {
-        private readonly string assetDomain;
         private readonly Lazy<IDictionary<string, AssetData>> source;
          
         public AssetMapProvider(IAssetDataReader assetDataReader)
         {
-            assetDomain = System.Configuration.ConfigurationManager.AppSettings["AssetDomain"]?.TrimEnd('/') ?? string.Empty;
-            source = new Lazy<IDictionary<string, AssetData>>(assetDataReader.Read);
-        } 
+            source = new Lazy<IDictionary<string, AssetData>>(() => Load(assetDataReader));
+        }
+
+        private IDictionary<string, AssetData> Load(IAssetDataReader reader)
+        {
+            var basePath = System.Configuration.ConfigurationManager.AppSettings["AssetDomain"]?.TrimEnd('/') ?? string.Empty;
+            var result = reader.Read();
+
+            if (basePath.IsEmpty()) return result;
+
+            foreach (var asset in result.Select(item => item.Value))
+            {
+                asset.Js = FixPathForDomain(asset.Js, basePath);
+                asset.Css = FixPathForDomain(asset.Css, basePath);
+            }
+
+            return result;
+        }
 
         public string Css(string name)
         {
-            return AssetUrl(source.Value.GetValueOrDefault(name)?.Css);
+            return source.Value.GetValueOrDefault(name)?.Css;
         }
 
         public string Js(string name)
         {
-            return AssetUrl(source.Value.GetValueOrDefault(name)?.Js);
+            return source.Value.GetValueOrDefault(name)?.Js;
         }
-
-        private string AssetUrl(string url)
+        
+        private string FixPathForDomain(string path, string basePath)
         {
-            if (url.IsEmpty()) return string.Empty;
+            if (path.IsEmpty()) return string.Empty;
 
-            return assetDomain.HasValue() ? $"{assetDomain}/{url.TrimStart('/')}" : url;
+            path = path.TrimStart('/');
+            var sepIndex = path.IndexOf('/');
+
+            return sepIndex == -1 ? $"{basePath}/{path}" : $"{basePath}/{path.Substring(sepIndex+1)}";
         }
     }
 }
