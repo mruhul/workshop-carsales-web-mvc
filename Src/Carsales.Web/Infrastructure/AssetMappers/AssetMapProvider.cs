@@ -6,8 +6,9 @@ using Carsales.Web.Infrastructure.Attributes;
 
 namespace Carsales.Web.Infrastructure.AssetMappers
 {
-    interface IAssetMapProvider
+    public interface IAssetMapProvider
     {
+        void Init();
         string Css(string name);
         string Js(string name);
     }
@@ -36,6 +37,12 @@ namespace Carsales.Web.Infrastructure.AssetMappers
             }
 
             return result;
+        }
+
+        public void Init()
+        {
+            // just fire the load of data
+            var d = source.Value;
         }
 
         public string Css(string name)

@@ -233,6 +233,7 @@
     <Compile Include="Infrastructure\AssetMappers\AssetDataReader.cs" />
     <Compile Include="Infrastructure\AssetMappers\AssetMapExtensions.cs" />
     <Compile Include="Infrastructure\AssetMappers\AssetMapProvider.cs" />
+    <Compile Include="Infrastructure\AssetMappers\InitAssetMapStartUpTask.cs" />
     <Compile Include="Infrastructure\Attributes\AutoBindAttribute.cs" />
     <Compile Include="Infrastructure\ErrorSafeHelpers\ErrorSafeExecutor.cs" />
     <Compile Include="Infrastructure\ErrorSafeHelpers\ErrorSafeResponse.cs" />
