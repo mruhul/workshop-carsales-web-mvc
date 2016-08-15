@@ -9,6 +9,10 @@
 {
     @RenderSection("Styles")
 }
+@if (IsSectionDefined("TopScripts"))
+{
+    @RenderSection("TopScripts")
+}
 @{
     Html.RenderPartial("_Header");
 }
