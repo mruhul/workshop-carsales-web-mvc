@@ -6,7 +6,7 @@ namespace Carsales.Web.Features.Shared.SiteNav
     public interface ISiteNavViewModelProvider
     {
         SiteNavViewModel Get();
-        void Set(SiteNavViewModelProvider value);
+        void Set(SiteNavViewModel value);
     }
 
     [AutoBind]
@@ -22,10 +22,10 @@ namespace Carsales.Web.Features.Shared.SiteNav
 
         public SiteNavViewModel Get()
         {
-            return store.Get<SiteNavViewModel>(Key) ?? SiteNavViewModel.Empty;
+            return store.Get<SiteNavViewModel>(Key) ?? new SiteNavViewModel();
         }
 
-        public void Set(SiteNavViewModelProvider value)
+        public void Set(SiteNavViewModel value)
         {
             store.Set(Key, value);
         }

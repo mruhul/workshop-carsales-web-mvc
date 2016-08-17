@@ -1,4 +1,6 @@
 ﻿using Autofac;
+using Bolt.RequestBus;
+using Carsales.Web.Features.Shared.SiteNav;
 
 namespace Carsales.Web.Ioc
 {
@@ -6,7 +8,7 @@ namespace Carsales.Web.Ioc
     {
         protected override void Load(ContainerBuilder builder)
         {
-            // builder.RegisterGeneric(typeof(LoadCategoryMenuOnPageLoadEventHandler<>)).As(typeof(IAsyncEventHandler<>));
+            builder.RegisterGeneric(typeof(LoadSiteNavOnPageLoad<>)).As(typeof(IAsyncEventHandler<>));
         }
     }
 }

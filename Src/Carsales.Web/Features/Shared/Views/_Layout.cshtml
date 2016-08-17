@@ -9,31 +9,39 @@
     @RenderSection("Head")
 }
 
-
-@if (IsSectionDefined("Styles"))
-{
-    @RenderSection("Styles")
+@section Styles{
+    @if (IsSectionDefined("Styles"))
+    {
+        @RenderSection("Styles")
+    }
+    @siteNav.StyleTag
 }
-@siteNav.StyleTag
+
 
 @if (IsSectionDefined("TopScripts"))
 {
     @RenderSection("TopScripts")
 }
 
-@siteNav.TopNav
+@siteNav.TopNavHtml
 @{
     Html.RenderPartial("_Header");
 }
 <section>
     @RenderBody()
 </section>
-@{
-    Html.RenderPartial("_Footer");
+
+@siteNav.FooterHtml
+
+@section BottomScripts
+{
+    @siteNav.ScriptTag
+    @if (IsSectionDefined("BottomScripts"))
+    {
+        @RenderSection("BottomScripts")
+    }
 }
 
-@if (IsSectionDefined("BottomScript"))
-{
-    @RenderSection("BottomScript", false)
-}
-@siteNav.ScriptTag
+
+
+

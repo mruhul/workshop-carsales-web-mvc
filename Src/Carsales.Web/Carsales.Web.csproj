@@ -232,7 +232,9 @@
     <Compile Include="App_Start\ViewEngineSetupTask.cs" />
     <Compile Include="Features\Home\HomeController.cs" />
     <Compile Include="Features\Home\HomePageRequestedEvent.cs" />
+    <Compile Include="Features\Shared\SiteNav\IRequireSiteNav.cs" />
     <Compile Include="Features\Shared\SiteNav\LoadSiteNavOnPageLoad.cs" />
+    <Compile Include="Features\Shared\SiteNav\SiteNavSettings.cs" />
     <Compile Include="Features\Shared\SiteNav\SiteNavViewModel.cs" />
     <Compile Include="Features\Shared\SiteNav\SiteNavViewModelExtensions.cs" />
     <Compile Include="Features\Shared\SiteNav\SiteNavViewModelProvider.cs" />
@@ -254,6 +256,7 @@
     <Compile Include="Infrastructure\StartupTasks\IStartupTask.cs" />
     <Compile Include="Infrastructure\Stores\ContextStore.cs" />
     <Compile Include="Infrastructure\Stores\ContextStoreExtensions.cs" />
+    <Compile Include="Infrastructure\UserContext\UserContext.cs" />
     <Compile Include="Infrastructure\ViewEngines\FeatureBasedRazorViewEngine.cs" />
     <Compile Include="Ioc\ConventionBasedModule.cs" />
     <Compile Include="Ioc\CoreModule.cs" />
