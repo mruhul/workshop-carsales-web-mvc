@@ -1,18 +1,27 @@
-﻿@{
+﻿@using Carsales.Web.Features.Shared.SiteNav
+@{
     Layout = "~/Features/Shared/Views/_LayoutBasic.cshtml";
+    var siteNav = Html.SiteNav();
 }
+
 @if (IsSectionDefined("Head"))
 {
     @RenderSection("Head")
 }
+
+
 @if (IsSectionDefined("Styles"))
 {
     @RenderSection("Styles")
 }
+@siteNav.StyleTag
+
 @if (IsSectionDefined("TopScripts"))
 {
     @RenderSection("TopScripts")
 }
+
+@siteNav.TopNav
 @{
     Html.RenderPartial("_Header");
 }
@@ -22,7 +31,9 @@
 @{
     Html.RenderPartial("_Footer");
 }
+
 @if (IsSectionDefined("BottomScript"))
 {
-    @RenderSection("BottomScript")
+    @RenderSection("BottomScript", false)
 }
+@siteNav.ScriptTag
