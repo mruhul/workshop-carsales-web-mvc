@@ -226,6 +226,8 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteSetupTask.cs" />
     <Compile Include="App_Start\ViewEngineSetupTask.cs" />
+    <Compile Include="Features\Home\HomeController.cs" />
+    <Compile Include="Features\Home\HomePageRequestedEvent.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -290,6 +292,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="typings.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Features\Home\Views\" />
+    <Folder Include="Views\Home\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
