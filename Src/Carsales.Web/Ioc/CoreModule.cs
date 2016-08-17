@@ -1,5 +1,8 @@
 using System;
 using Autofac;
+using Bolt.Cache;
+using Bolt.Cache.Builders;
+using Bolt.Cache.Impl;
 using Bolt.Logger;
 using Bolt.RestClient;
 using Bolt.RestClient.Builders;
@@ -27,6 +30,8 @@ namespace Carsales.Web.Ioc
             builder.Register(x => Bolt.Logger.NLog.LoggerFactory.Create("Carsales.Web"))
                 .As<ILogger>() 
                 .SingleInstance();
+
+            builder.Register(x => CacheStoreBuilder.New().Build()).As<ICacheStore>().SingleInstance();
         }
     }
 
