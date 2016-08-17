@@ -16,6 +16,7 @@ namespace Carsales.Web.Infrastructure.AssetMappers
     [AutoBindSingleton]
     public class AssetMapProvider : IAssetMapProvider
     {
+        private const string KeyAssetDomain = "AssetDomain";
         private readonly Lazy<IDictionary<string, AssetData>> source;
          
         public AssetMapProvider(IAssetDataReader assetDataReader)
@@ -25,7 +26,7 @@ namespace Carsales.Web.Infrastructure.AssetMappers
 
         private IDictionary<string, AssetData> Load(IAssetDataReader reader)
         {
-            var basePath = System.Configuration.ConfigurationManager.AppSettings["AssetDomain"]?.TrimEnd('/') ?? string.Empty;
+            var basePath = System.Configuration.ConfigurationManager.AppSettings[KeyAssetDomain]?.TrimEnd('/') ?? string.Empty;
             var result = reader.Read();
 
             if (basePath.IsEmpty()) return result;

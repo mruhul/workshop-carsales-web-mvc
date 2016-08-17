@@ -8,7 +8,7 @@ namespace Carsales.Web.Ioc
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterGeneric(typeof(LoadSiteNavOnPageLoad<>)).As(typeof(IAsyncEventHandler<>));
+            builder.RegisterGeneric(typeof(LoadSiteNavOnPageLoadEventHandler<>)).As(typeof(IAsyncEventHandler<>));
         }
     }
 }

@@ -9,26 +9,29 @@ using Bolt.RestClient.Builders;
 using Bolt.RestClient.Extensions;
 using Carsales.Web.Infrastructure.Cache;
 using Carsales.Web.Infrastructure.Configs;
+using Carsales.Web.Infrastructure.UserContext;
 
 namespace Carsales.Web.Features.Shared.SiteNav
 {
-    public class LoadSiteNavOnPageLoad<TEvent> : IAsyncEventHandler<TEvent> where TEvent : IEvent
+    public class LoadSiteNavOnPageLoadEventHandler<TEvent> : IAsyncEventHandler<TEvent> where TEvent : IEvent
     {
         private readonly IRestClient restClient;
+        private readonly ISiteNavApiProxy proxy;
         private readonly ISiteNavViewModelProvider provider;
         private readonly ICacheStore cache;
+        private readonly IUserContext userContext;
         private readonly ISettings<SiteNavSettings> settings;
         private const string Key = "SiteNav";
 
-        public LoadSiteNavOnPageLoad(IRestClient restClient, 
+        public LoadSiteNavOnPageLoadEventHandler(ISiteNavApiProxy proxy, 
             ISiteNavViewModelProvider provider,
             ICacheStore cache,
-            ISettings<SiteNavSettings> settings)
+            IUserContext userContext)
         {
-            this.restClient = restClient;
+            this.proxy = proxy;
             this.provider = provider;
             this.cache = cache;
-            this.settings = settings;
+            this.userContext = userContext;
         }
 
         public async Task HandleAsync(TEvent eEvent)
@@ -44,36 +47,19 @@ namespace Carsales.Web.Features.Shared.SiteNav
 
         private async Task<SiteNavViewModel> LoadFromApi()
         {
-            var response = await restClient
-                .For(UrlBuilder.Host(settings.Value.BaseUrl).Route("/navigation/carsales"))
-                .Timeout(TimeSpan.FromSeconds(1))
-                .RetryOnFailure(1)
-                .GetAsync<SiteNavResponse>();
-
-            var output = response?.Output;
-
-            return output == null
+            var siteNavData = await proxy.GetAsync(userContext.CurrentUserId);
+            
+            return siteNavData == null
                 ? new SiteNavViewModel()
                 : new SiteNavViewModel
                 {
-                    StyleTag = MvcHtmlString.Create(output.Data.Style),
-                    ScriptTag = MvcHtmlString.Create(output.Data.Script),
-                    FooterHtml = MvcHtmlString.Create(output.Data.Footer),
-                    TopNavHtml = MvcHtmlString.Create(output.Data.TopNav)
+                    StyleTag = MvcHtmlString.Create(siteNavData.Style),
+                    ScriptTag = MvcHtmlString.Create(siteNavData.Script),
+                    FooterHtml = MvcHtmlString.Create(siteNavData.Footer),
+                    TopNavHtml = MvcHtmlString.Create(siteNavData.TopNav)
                 };
         }
     }
 
-    internal class SiteNavResponse
-    {
-        public SiteNavData Data { get; set; }
-    }
-
-    internal class SiteNavData
-    {
-        public string Script { get; set; }
-        public string Style { get; set; }
-        public string TopNav { get; set; }
-        public string Footer { get; set; }
-    }
+    
 }

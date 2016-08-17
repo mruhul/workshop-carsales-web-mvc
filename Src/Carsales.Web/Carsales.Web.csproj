@@ -237,7 +237,8 @@
     <Compile Include="Features\Home\HomeController.cs" />
     <Compile Include="Features\Home\HomePageRequestedEvent.cs" />
     <Compile Include="Features\Shared\SiteNav\IRequireSiteNav.cs" />
-    <Compile Include="Features\Shared\SiteNav\LoadSiteNavOnPageLoad.cs" />
+    <Compile Include="Features\Shared\SiteNav\LoadSiteNavOnPageLoadEventHandler.cs" />
+    <Compile Include="Features\Shared\SiteNav\SiteNavApiProxy.cs" />
     <Compile Include="Features\Shared\SiteNav\SiteNavSettings.cs" />
     <Compile Include="Features\Shared\SiteNav\SiteNavViewModel.cs" />
     <Compile Include="Features\Shared\SiteNav\SiteNavViewModelExtensions.cs" />
