@@ -1,6 +1,11 @@
 ﻿@import 'variables.scss';
 @import 'reset.scss';
 
+body{
+    font-family: $fontFamilyDefault;
+    font-size: $fontSizeDefault;
+}
+
 .page-main{
     width:100%;
     text-align:center;
