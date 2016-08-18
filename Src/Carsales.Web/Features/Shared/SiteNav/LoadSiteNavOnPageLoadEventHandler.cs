@@ -1,26 +1,20 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web.Mvc;
 using Bolt.Cache;
 using Bolt.Cache.Extensions;
 using Bolt.RequestBus;
-using Bolt.RestClient;
-using Bolt.RestClient.Builders;
-using Bolt.RestClient.Extensions;
 using Carsales.Web.Infrastructure.Cache;
-using Carsales.Web.Infrastructure.Configs;
+using Carsales.Web.Infrastructure.StartupTasks;
 using Carsales.Web.Infrastructure.UserContext;
 
 namespace Carsales.Web.Features.Shared.SiteNav
 {
     public class LoadSiteNavOnPageLoadEventHandler<TEvent> : IAsyncEventHandler<TEvent> where TEvent : IEvent
     {
-        private readonly IRestClient restClient;
         private readonly ISiteNavApiProxy proxy;
         private readonly ISiteNavViewModelProvider provider;
         private readonly ICacheStore cache;
         private readonly IUserContext userContext;
-        private readonly ISettings<SiteNavSettings> settings;
         private const string Key = "SiteNav";
 
         public LoadSiteNavOnPageLoadEventHandler(ISiteNavApiProxy proxy, 
@@ -48,18 +42,21 @@ namespace Carsales.Web.Features.Shared.SiteNav
         private async Task<SiteNavViewModel> LoadFromApi()
         {
             var siteNavData = await proxy.GetAsync(userContext.CurrentUserId);
-            
-            return siteNavData == null
+
+            return BuildViewModel(siteNavData);
+        }
+
+        private SiteNavViewModel BuildViewModel(SiteNavData data)
+        {
+            return data == null
                 ? new SiteNavViewModel()
                 : new SiteNavViewModel
                 {
-                    StyleTag = MvcHtmlString.Create(siteNavData.Style),
-                    ScriptTag = MvcHtmlString.Create(siteNavData.Script),
-                    FooterHtml = MvcHtmlString.Create(siteNavData.Footer),
-                    TopNavHtml = MvcHtmlString.Create(siteNavData.TopNav)
+                    StyleTag = MvcHtmlString.Create(data.Style),
+                    ScriptTag = MvcHtmlString.Create(data.Script),
+                    FooterHtml = MvcHtmlString.Create(data.Footer),
+                    TopNavHtml = MvcHtmlString.Create(data.TopNav)
                 };
         }
     }
-
-    
 }
