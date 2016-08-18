@@ -1,4 +1,5 @@
 ﻿@using Carsales.Web.Features.Shared.SiteNav
+@using Carsales.Web.Infrastructure.AssetMappers
 @{
     Layout = "~/Features/Shared/Views/_LayoutBasic.cshtml";
     var siteNav = Html.SiteNav();
@@ -14,6 +15,7 @@
     {
         @RenderSection("Styles")
     }
+    @Html.AssetCss("common-page")
     @siteNav.StyleTag
 }
 
@@ -24,17 +26,21 @@
 }
 
 @siteNav.TopNavHtml
-@{
-    Html.RenderPartial("_Header");
-}
-<section>
-    @RenderBody()
-</section>
+
+<div class="page-main">
+    @{
+        Html.RenderPartial("_Header");
+    }
+    <section>
+        @RenderBody()
+    </section>
+</div>
 
 @siteNav.FooterHtml
 
 @section BottomScripts
 {
+    @Html.AssetJs("common-page")
     @siteNav.ScriptTag
     @if (IsSectionDefined("BottomScripts"))
     {

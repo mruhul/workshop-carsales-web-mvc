@@ -1,0 +1,15 @@
+﻿@import 'variables.scss';
+@import 'reset.scss';
+
+.page-main{
+    width:100%;
+    text-align:center;
+    margin-bottom:25px;
+
+    .container{
+        width: $pageWidth;
+        margin:0 auto;
+        text-align:left;
+    }
+}
+
