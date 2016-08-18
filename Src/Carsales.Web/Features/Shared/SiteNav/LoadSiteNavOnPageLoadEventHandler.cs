@@ -4,7 +4,6 @@ using Bolt.Cache;
 using Bolt.Cache.Extensions;
 using Bolt.RequestBus;
 using Carsales.Web.Infrastructure.Cache;
-using Carsales.Web.Infrastructure.StartupTasks;
 using Carsales.Web.Infrastructure.UserContext;
 
 namespace Carsales.Web.Features.Shared.SiteNav
