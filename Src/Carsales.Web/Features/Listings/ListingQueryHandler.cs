@@ -4,13 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Bolt.Common.Extensions;
 using Bolt.RequestBus;
-using Bolt.RequestBus.Filters;
 using Bolt.RequestBus.Handlers;
 using Bolt.RestClient;
 using Bolt.RestClient.Builders;
 using Bolt.RestClient.Extensions;
 using Carsales.Web.Features.Shared.Proxies;
-using Carsales.Web.Features.Shared.SavedCars;
 using Carsales.Web.Infrastructure.Attributes;
 using Carsales.Web.Infrastructure.Configs;
 
@@ -90,11 +88,11 @@ namespace Carsales.Web.Features.Listings
                             {
                                 Body = x.BodyStyleCategory,
                                 NetworkId = x.Id,
-                                Odometer = $"{x.Odometer:n0}",
+                                Odometer = x.Odometer?.ToString("N0"),
                                 Title = x.Title,
                                 Photo = x.PhotoList?.FirstOrDefault(),
                                 Transmission = x.Transmission,
-                                Price = $"{x.Price:n0}",
+                                Price = x.Price?.ToString("N0"),
                                 SellerType = x.SellerType,
                                 ListingType = x.ListingType
                             })
@@ -102,30 +100,6 @@ namespace Carsales.Web.Features.Listings
         }
     }
 
-    [AutoBind]
-    public class PopulateSavedStatusFilter : AsyncRequestFilterBase<ListingsRequest, ListingViewModel>
-    {
-        private readonly ICurrentUserSavedCarsProvider provider;
-
-        public PopulateSavedStatusFilter(ICurrentUserSavedCarsProvider provider)
-        {
-            this.provider = provider;
-        }
-
-        public override Task OnCompletedAsync(ListingsRequest request, ListingViewModel value)
-        {
-            var savedIds = provider.Get();
-
-            value.Items = value.Items.Select(x =>
-            {
-                x.IsSaved = savedIds.Any(id => id == x.NetworkId);
-                return x;
-            });
-
-            return Task.FromResult(0);
-        }
-    }
-    
 
     public class RyvusSearchResponse
     {
@@ -142,8 +116,8 @@ namespace Carsales.Web.Features.Listings
         public string ListingType { get; set; }
         public string Transmission { get; set; }
         public string BodyStyleCategory { get; set; }
-        public string Odometer { get; set; }
-        public string Price { get; set; }
+        public int? Odometer { get; set; }
+        public decimal? Price { get; set; }
         public string PriceType { get; set; }
     }
 }

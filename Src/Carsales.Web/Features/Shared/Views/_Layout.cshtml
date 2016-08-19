@@ -11,12 +11,12 @@
 }
 
 @section Styles{
+    @Html.AssetCss("common-page")
+    @siteNav.StyleTag
     @if (IsSectionDefined("Styles"))
     {
         @RenderSection("Styles")
     }
-    @Html.AssetCss("common-page")
-    @siteNav.StyleTag
 }
 
 
