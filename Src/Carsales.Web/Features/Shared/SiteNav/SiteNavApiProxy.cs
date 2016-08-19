@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Bolt.RestClient;
 using Bolt.RestClient.Builders;
 using Bolt.RestClient.Extensions;
+using Carsales.Web.Features.Shared.Proxies;
 using Carsales.Web.Infrastructure.Attributes;
 using Carsales.Web.Infrastructure.Configs;
 
@@ -30,9 +31,9 @@ namespace Carsales.Web.Features.Shared.SiteNav
     public class SiteNavApiProxy : ISiteNavApiProxy
     {
         private readonly IRestClient restClient;
-        private readonly ISettings<SiteNavSettings> settings;
+        private readonly ISettings<ProxyEndpointSettings> settings;
 
-        public SiteNavApiProxy(IRestClient restClient, ISettings<SiteNavSettings> settings)
+        public SiteNavApiProxy(IRestClient restClient, ISettings<ProxyEndpointSettings> settings)
         {
             this.restClient = restClient;
             this.settings = settings;
@@ -42,7 +43,7 @@ namespace Carsales.Web.Features.Shared.SiteNav
         {
             var response = await restClient
                 .For(UrlBuilder
-                    .Host(settings.Value.BaseUrl)
+                    .Host(settings.Value.SiteNav)
                     .Route("/navigation/carsales")
                     .QueryParam("memberId", memberId))
                 .Timeout(TimeSpan.FromSeconds(1))

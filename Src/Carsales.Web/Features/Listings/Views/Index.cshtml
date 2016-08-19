@@ -1,0 +1,14 @@
+﻿@using Bolt.Common.Extensions
+@model Carsales.Web.Features.Listings.ListingViewModel
+<div class="container">
+    <h1>Total: @Model.Total</h1>
+    <ul>
+        @foreach (var item in Model.Items)
+        {
+            <li>
+                <h2><a href="/details/@item.Title.ToSlug()/@item.NetworkId">@item.Title</a></h2>
+                <a href="#">@(item.IsSaved ? "Saved" : "Save")</a>
+            </li>
+        }
+    </ul>
+</div>

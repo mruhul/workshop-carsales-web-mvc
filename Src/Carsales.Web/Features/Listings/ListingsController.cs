@@ -21,7 +21,7 @@ namespace Carsales.Web.Features.Listings
         {
             var vm = await bus.SendAsync<ListingsRequest, ListingViewModel>(request);
 
-            return View(vm);
+            return View(vm.Value);
         }
     }
 

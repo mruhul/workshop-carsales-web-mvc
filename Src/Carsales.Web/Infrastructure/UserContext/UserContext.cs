@@ -15,7 +15,7 @@ namespace Carsales.Web.Infrastructure.UserContext
     [AutoBindPerRequest]
     public class UserContext : IUserContext
     {
-        public string CurrentUserId => "4eaa1c60-5871-4f9c-b825-7e5f1ed7b892";
+        public string CurrentUserId => "1c28b1ff-3a9a-466e-a0f7-13b72af3bdef";
         public bool IsAuthenticated => true;
     }
 }
