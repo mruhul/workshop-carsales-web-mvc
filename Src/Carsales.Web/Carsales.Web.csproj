@@ -60,6 +60,14 @@
       <HintPath>..\packages\Autofac.Owin.4.0.0\lib\net45\Autofac.Integration.Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Autofac.Integration.WebApi, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.WebApi2.4.0.0\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.WebApi.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.WebApi2.Owin.4.0.0\lib\net45\Autofac.Integration.WebApi.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="AutoMapper, Version=5.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.5.1.1\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
@@ -122,6 +130,10 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http.Owin, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Owin.5.2.0\lib\net45\System.Web.Http.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -244,6 +256,9 @@
     <Compile Include="Features\Shared\SavedCars\CurrentUserSavedCarsProvider.cs" />
     <Compile Include="Features\Shared\SavedCars\IRequireSavedItems.cs" />
     <Compile Include="Features\Shared\SavedCars\LoadCurrentUserSavedCarsOnPageLoad.cs" />
+    <Compile Include="Features\Shared\SavedCars\Api\SavedCarsApiController.cs" />
+    <Compile Include="Features\Shared\SavedCars\SavedCarsController.cs" />
+    <Compile Include="Features\Shared\SavedCars\SavedItemsRenderExtensions.cs" />
     <Compile Include="Features\Shared\SiteNav\IRequireSiteNav.cs" />
     <Compile Include="Features\Shared\SiteNav\LoadSiteNavOnPageLoadEventHandler.cs" />
     <Compile Include="Features\Shared\SiteNav\SiteNavApiProxy.cs" />
@@ -283,6 +298,7 @@
     <Content Include="Features\Listings\Assets\listing-page.js" />
     <Content Include="Features\Shared\Assets\common-page.js" />
     <Content Include="Features\Shared\Assets\Img\cs_logo-143x53.png" />
+    <Content Include="Features\Shared\SavedCars\Assets\saved-cars.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -324,6 +340,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Home\" />
+    <Folder Include="Views\SavedItems\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Features\Home\Views\Index.cshtml" />
@@ -345,6 +362,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Features\Listings\Assets\Css\listing.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Features\Shared\SavedCars\Views\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Features\Shared\SavedCars\Assets\Css\saved-cars.scss" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

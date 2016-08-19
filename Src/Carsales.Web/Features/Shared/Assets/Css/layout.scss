@@ -15,6 +15,20 @@ body{
         width: $pageWidth;
         margin:0 auto;
         text-align:left;
+
+        .two-col{
+            width:100%;
+            overflow:hidden;
+
+            .col-left{
+                width:70%;
+                float:left;
+            }
+            .col-right{
+                width:30%;
+                float:right;
+            }
+        }
     }
 }
 

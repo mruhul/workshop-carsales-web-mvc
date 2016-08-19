@@ -42,6 +42,9 @@ module.exports = {
         filename: isProd ? '[name]-[chunkhash].js' : '[name].js',
         publicPath: config.publicPath
     },
+    //externals: {
+    //    "jquery": "jQuery"
+    //},
     module: {
         preLoaders:[
             {

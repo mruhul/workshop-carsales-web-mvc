@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Web.Http;
+using System.Web.Mvc;
 using System.Web.Routing;
 using Carsales.Web.Infrastructure.Attributes;
 using Carsales.Web.Infrastructure.StartupTasks;
