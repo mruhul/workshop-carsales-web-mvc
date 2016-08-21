@@ -58,7 +58,7 @@ namespace Carsales.Web.Features.Shared.SavedCars.Api
                 NetworkId = x.Id,
                 Title = x.Specification.Title,
                 Photo = x.Media.Photos[0].PhotoPath,
-                Price = x.Prices.Price
+                Price = x.Prices.Price.ToString("N0")
             });
         }
     }
@@ -73,6 +73,6 @@ namespace Carsales.Web.Features.Shared.SavedCars.Api
         public string NetworkId { get; set; }
         public string Title { get; set; }
         public string Photo { get; set; }
-        public int Price { get; set; }
+        public string Price { get; set; }
     }
 }

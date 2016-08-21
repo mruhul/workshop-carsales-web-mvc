@@ -5,8 +5,12 @@
     <ul>
         @foreach (var item in Model)
         {
-            <li data-id="@item">
+            <li data-id="@item" class="loading">
                 <img src="http://placehold.it/128x85" width="128" height="85"/>
+                <div class="details">
+                    <h2>..........................</h2>
+                    <div class="price">$ ......</div>
+                </div>
             </li>
         }
     </ul>

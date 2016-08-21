@@ -10,8 +10,16 @@ var jQuery = require('jquery');
                 console.log(response.Value);
                 $.each(response.Value,
                     function (index, item) {
-                        var img = dom.find('[data-id="' + item.NetworkId + '"] img');
-                        img.attr('src', '//carsales.li.csnstatic.com/carsales/'+ item.Photo +'?aspect=centered&height=85&width=128')
+                        var el = dom.find('[data-id="' + item.NetworkId + '"]');
+                        var img = el.find('img');
+                        img.attr('src',
+                            '//carsales.li.csnstatic.com/carsales/' +
+                            item.Photo +
+                            '?aspect=centered&height=85&width=128');
+
+                        el.find('h2').html(item.Title);
+                        el.find('.price').html('$' + item.Price);
+                        el.removeClass('loading');
                     });
             })
             .fail(function() {
