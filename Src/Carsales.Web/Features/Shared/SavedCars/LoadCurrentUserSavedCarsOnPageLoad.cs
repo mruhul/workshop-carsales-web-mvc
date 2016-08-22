@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Bolt.CodeProfiler;
+using Bolt.Logger;
 using Bolt.RequestBus;
 using Bolt.RestClient;
 using Bolt.RestClient.Builders;
@@ -21,24 +23,27 @@ namespace Carsales.Web.Features.Shared.SavedCars
         private readonly ICurrentUserSavedCarsProvider provider;
         private readonly IUserContext userContext;
         private readonly ISettings<ProxyEndpointSettings> settings;
+        private readonly ICodeProfiler codeProfiler;
 
         public LoadCurrentUserSavedCarsOnPageLoad(IRestClient restClient, 
             ICurrentUserSavedCarsProvider provider,
             IUserContext userContext,
-            ISettings<ProxyEndpointSettings> settings)
+            ISettings<ProxyEndpointSettings> settings, ICodeProfiler codeProfiler)
         {
             this.restClient = restClient;
             this.provider = provider;
             this.userContext = userContext;
             this.settings = settings;
+            this.codeProfiler = codeProfiler;
         }
 
 
         public async Task HandleAsync(TEvent eEvent)
         {
             if (!(eEvent is IRequireSavedItems)) return;
-
-            var response = await restClient.For(UrlBuilder
+            using (codeProfiler.Start("LoadCurrentUserSavedIds"))
+            {
+                var response = await restClient.For(UrlBuilder
                 .Host(settings.Value.SavedItems)
                 .Route("members/{0}/saved-items", userContext.CurrentUserId)
                 .QueryParam("IsConvertToShowRoom", false)
@@ -49,7 +54,10 @@ namespace Carsales.Web.Features.Shared.SavedCars
                 .RetryOnFailure(1)
                 .GetAsync<SavedItemsApiResponse>();
 
-            provider.Set(response.Output?.Items?.Select(x => x.AdDetails.NetworkId));
+
+                provider.Set(response.Output?.Items?.Select(x => x.AdDetails.NetworkId));
+            }
+            
         }
     }
     

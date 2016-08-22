@@ -13,6 +13,7 @@ namespace Carsales.Web.Features.Shared.Proxies
     {
         public string Q { get; set; }
         public string Sl { get; set; }
+        public string Sr { get; set; }
         public string Count { get; set; }
     }
 

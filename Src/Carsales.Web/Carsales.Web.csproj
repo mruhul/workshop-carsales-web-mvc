@@ -80,6 +80,10 @@
       <HintPath>..\packages\Bolt.Cache.1.3.0.0\lib\net45\Bolt.Cache.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Bolt.CodeProfiler, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Bolt.CodeProfiler.1.0.0.0\lib\net45\Bolt.CodeProfiler.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Bolt.Common.Extensions, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Bolt.Common.Extensions.1.0.4.0\lib\net45\Bolt.Common.Extensions.dll</HintPath>
       <Private>True</Private>

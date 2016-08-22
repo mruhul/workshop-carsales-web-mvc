@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Bolt.CodeProfiler;
 using Bolt.Common.Extensions;
+using Bolt.Logger;
 using Bolt.RequestBus;
 using Bolt.RequestBus.Handlers;
 using Bolt.RestClient;
 using Bolt.RestClient.Builders;
+using Bolt.RestClient.Dto;
 using Bolt.RestClient.Extensions;
 using Carsales.Web.Features.Shared.Proxies;
 using Carsales.Web.Infrastructure.Attributes;
@@ -46,57 +49,75 @@ namespace Carsales.Web.Features.Listings
     public class ListingQueryHandler : AsyncRequestHandlerBase<ListingsRequest,ListingViewModel>
     {
         private readonly IRequestBus bus;
-        private readonly IRestClient restClient;
-        private readonly ISettings<ProxyEndpointSettings> settings;
+        private readonly IRyvusApiProxy ryvusApiProxy;
+        private readonly ILogger logger;
+        private readonly ICodeProfiler codeProfiler;
 
-        public ListingQueryHandler(IRequestBus bus, IRestClient restClient, 
-            ISettings<ProxyEndpointSettings> settings)
+        public ListingQueryHandler(IRequestBus bus, 
+            IRyvusApiProxy ryvusApiProxy,
+            ILogger logger, ICodeProfiler codeProfiler)
         {
             this.bus = bus;
-            this.restClient = restClient;
-            this.settings = settings;
+            this.ryvusApiProxy = ryvusApiProxy;
+            this.logger = logger;
+            this.codeProfiler = codeProfiler;
         }
 
         protected override async Task<ListingViewModel> ProcessAsync(ListingsRequest msg)
         {
-            var taskEvent = bus.PublishAsync(new ListingPageRequestedEvent());
+            using (codeProfiler.Start("ListingPage"))
+            {
+                var taskEvent = bus.PublishAsync(new ListingPageRequestedEvent());
 
-            if (msg.Limit <= 0) msg.Limit = 15;
+                if (msg.Limit <= 0) msg.Limit = 15;
 
-            var taskResponse = restClient.For(UrlBuilder
-                .Host(settings.Value.Ryvuss)
-                .Route("carlistingsubset")
-                .QueryParam("q", $"((((Service=[Carsales]&(Make=[{msg.Make}]{(msg.Model.HasValue() ? "&Model=[{0}]".FormatWith(msg.Model) : string.Empty)})))))")
-                .QueryParam("count", "true")
-                .QueryParam("sr", $"latest||{msg.Offset}|{msg.Limit}", true))
-                .Timeout(TimeSpan.FromSeconds(1))
-                .RetryOnFailure(1)
-                .GetAsync<RyvusSearchResponse>();
+                var taskResponse = LoadFromApiAsync(msg);
 
-            await Task.WhenAll(taskEvent, taskResponse);
+                await Task.WhenAll(taskEvent, taskResponse);
 
-            var result = taskResponse.Result.Output;
+                var result = taskResponse.Result.Output;
 
-            return result == null
-                ? new ListingViewModel()
-                : new ListingViewModel
-                {
-                    Total = result.Count,
-                    Items = result.SearchResults
+                return result == null
+                    ? new ListingViewModel()
+                    : new ListingViewModel
+                    {
+                        Total = result.Count,
+                        Items = result.SearchResults
                             .NullSafe()
-                            .Select(x => new ListingItem
-                            {
-                                Body = x.BodyStyleCategory,
-                                NetworkId = x.Id,
-                                Odometer = x.Odometer?.ToString("N0"),
-                                Title = x.Title,
-                                Photo = x.PhotoList?.FirstOrDefault(),
-                                Transmission = x.Transmission,
-                                Price = x.Price?.ToString("N0"),
-                                SellerType = x.SellerType,
-                                ListingType = x.ListingType
-                            })
-                };
+                            .Select(BuildListItem)
+                    };
+            }
+        }
+
+        private async Task<RestResponse<RyvusSearchResponse>> LoadFromApiAsync(ListingsRequest msg)
+        {
+            using (codeProfiler.Start("LoadMakes"))
+            {
+                return await ryvusApiProxy.GetAsync<RyvusSearchResponse>(new RyvusGetInput
+                {
+                    Count = "true",
+                    Q =
+                        $"((((Service=[Carsales]&(Make=[{msg.Make}]{(msg.Model.HasValue() ? "&Model=[{0}]".FormatWith(msg.Model) : string.Empty)})))))",
+                    Sr = $"latest||{msg.Offset}|{msg.Limit}",
+
+                });
+            }
+        }
+
+        private static ListingItem BuildListItem(RyvusSearchItem x)
+        {
+            return new ListingItem
+            {
+                Body = x.BodyStyleCategory,
+                NetworkId = x.Id,
+                Odometer = x.Odometer?.ToString("N0"),
+                Title = x.Title,
+                Photo = x.PhotoList?.FirstOrDefault(),
+                Transmission = x.Transmission,
+                Price = x.Price?.ToString("N0"),
+                SellerType = x.SellerType,
+                ListingType = x.ListingType
+            };
         }
     }
 
