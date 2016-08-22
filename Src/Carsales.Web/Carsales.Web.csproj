@@ -296,7 +296,7 @@
   <ItemGroup>
     <Content Include="favicon.ico" />
     <Content Include="Features\Listings\Assets\listing-page.js" />
-    <Content Include="Features\Shared\Assets\common-page.js" />
+    <Content Include="Features\Shared\Assets\common.js" />
     <Content Include="Features\Shared\Assets\Img\cs_logo-143x53.png" />
     <Content Include="Features\Shared\SavedCars\Assets\saved-cars.js" />
     <Content Include="Global.asax" />
@@ -338,10 +338,7 @@
   <ItemGroup>
     <Content Include="typings.json" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Home\" />
-    <Folder Include="Views\SavedItems\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Features\Home\Views\Index.cshtml" />
   </ItemGroup>

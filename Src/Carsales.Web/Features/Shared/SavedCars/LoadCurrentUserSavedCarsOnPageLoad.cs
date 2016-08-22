@@ -13,6 +13,8 @@ using Carsales.Web.Infrastructure.UserContext;
 
 namespace Carsales.Web.Features.Shared.SavedCars
 {
+    public interface IRequireSavedItems { }
+
     public class LoadCurrentUserSavedCarsOnPageLoad<TEvent> : IAsyncEventHandler<TEvent> where TEvent : IEvent
     {
         private readonly IRestClient restClient;
