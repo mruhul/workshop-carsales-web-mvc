@@ -91,7 +91,7 @@ namespace Carsales.Web.Features.Listings
 
         private async Task<RestResponse<RyvusSearchResponse>> LoadFromApiAsync(ListingsRequest msg)
         {
-            using (codeProfiler.Start("LoadMakes"))
+            using (codeProfiler.Start("LoadSearchResultByMakes"))
             {
                 return await ryvusApiProxy.GetAsync<RyvusSearchResponse>(new RyvusGetInput
                 {

@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using Bolt.Common.Extensions;
 using Carsales.Web.Infrastructure.Attributes;
 using Carsales.Web.Infrastructure.Stores;

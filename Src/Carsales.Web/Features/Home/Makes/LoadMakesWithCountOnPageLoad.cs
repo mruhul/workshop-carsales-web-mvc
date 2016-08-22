@@ -8,6 +8,8 @@ using Bolt.RequestBus;
 using Carsales.Web.Features.Shared.Proxies;
 using Carsales.Web.Infrastructure.Attributes;
 using Carsales.Web.Infrastructure.Cache;
+using Carsales.Web.Infrastructure.Stores;
+using Expresso.Navigation;
 
 namespace Carsales.Web.Features.Home.Makes
 {
@@ -15,12 +17,12 @@ namespace Carsales.Web.Features.Home.Makes
     public class LoadMakesWithCountOnPageLoad : IAsyncEventHandler<HomePageRequestedEvent>
     {
         private readonly IRyvusApiProxy proxy;
-        private readonly IMakesProvider provider;
+        private readonly IContextStore<IEnumerable<MakesViewModelItem>> provider;
         private readonly ICacheStore cacheStore;
         private const string Key = "LoadMakesWithCountOnPageLoad:Count";
 
         public LoadMakesWithCountOnPageLoad(IRyvusApiProxy proxy,
-            IMakesProvider provider,
+            IContextStore<IEnumerable<MakesViewModelItem>> provider,
             ICacheStore cacheStore)
         {
             this.proxy = proxy;
@@ -55,5 +57,11 @@ namespace Carsales.Web.Features.Home.Makes
                 })
                 .OrderBy(x => x.Name);
         }
+    }
+
+    public class SelectListResponseDto
+    {
+        public int Count { get; set; }
+        public SelectListCollection SelectListCollection { get; set; }
     }
 }

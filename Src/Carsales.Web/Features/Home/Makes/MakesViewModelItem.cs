@@ -20,46 +20,14 @@ namespace Carsales.Web.Features.Home.Makes
         public long Count { get; set; }
     }
 
-    public interface IMakesProvider
-    {
-        IEnumerable<MakesViewModelItem> Get();
-        void Set(IEnumerable<MakesViewModelItem> vm);
-    }
-
-    [AutoBind]
-    public class MakesProvider : IMakesProvider
-    {
-        private const string Key = "MakesProvider:MakesViewModelItem";
-        private readonly IContextStore store;
-
-        public MakesProvider(IContextStore store)
-        {
-            this.store = store;
-        }
-
-        public IEnumerable<MakesViewModelItem> Get()
-        {
-            return store.Get<IEnumerable<MakesViewModelItem>>(Key).NullSafe();
-        }
-
-        public void Set(IEnumerable<MakesViewModelItem> vm)
-        {
-            store.Set(Key, vm);
-        }
-    }
-
     public static class MakesRenderPartialExtensions
     {
         public static void RenderPartialForMakesWithCount(this HtmlHelper html)
         {
             html.RenderPartial("~/Features/Home/Makes/Views/Index.cshtml", 
-                DependencyResolver.Current.GetService<IMakesProvider>().Get());
+                DependencyResolver.Current.GetService<IContextStore<IEnumerable<MakesViewModelItem>>>().Get());
         }
     }
 
-    public class SelectListResponseDto
-    {
-        public int Count { get; set; }
-        public SelectListCollection SelectListCollection { get; set; }
-    }
+    
 }

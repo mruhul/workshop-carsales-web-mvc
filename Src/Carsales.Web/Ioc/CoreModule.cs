@@ -15,6 +15,7 @@ using Bolt.RestClient.Dto;
 using Bolt.Serializer;
 using Bolt.Serializer.Json;
 using Carsales.Web.Infrastructure.RestClientLog;
+using Carsales.Web.Infrastructure.Stores;
 
 namespace Carsales.Web.Ioc
 {
@@ -22,6 +23,7 @@ namespace Carsales.Web.Ioc
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterGeneric(typeof(ContextStore<>)).As(typeof(IContextStore<>)).InstancePerRequest();
             builder.RegisterType<JsonSerializer>().As<ISerializer>().SingleInstance();
 
             builder.Register(x => RestClientBuilder.New()

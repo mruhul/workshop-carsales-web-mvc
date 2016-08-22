@@ -33,4 +33,30 @@ namespace Carsales.Web.Infrastructure.Stores
             store.TryAdd(name, value);
         }
     }
+
+    public interface IContextStore<T>
+    {
+        T Get();
+        void Set(T value);
+    }
+    
+    public class ContextStore<T> : IContextStore<T>
+    {
+        private T value;
+
+        public ContextStore()
+        {
+            value = default(T);
+        }
+        
+        public T Get()
+        {
+            return value;
+        }
+
+        public void Set(T data)
+        {
+            this.value = data;
+        }
+    }
 }
