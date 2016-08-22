@@ -2,6 +2,7 @@
 
 var glob = require('glob'),
     path = require('path'),
+    webpack = require('webpack'),
     CleanWebpackPlugin = require('clean-webpack-plugin'),
     ExtractTextPlugin  = require('extract-text-webpack-plugin'),
     AssetsPlugin = require('assets-webpack-plugin'),
@@ -30,6 +31,8 @@ function getEntryFiles(){
         let filename = path.basename(filePath, ext);
         entries[filename] = filePath;
     }
+
+    entries['common'] = ['jquery','./Features/Shared/Assets/common.js'];
 
     return entries;
 }
@@ -116,7 +119,12 @@ module.exports = {
             verbose: true, 
             dry: false
         }),
-        new ExtractTextPlugin(isProd ? '[name]-[chunkhash].css' : '[name].css') 
+        new ExtractTextPlugin(isProd ? '[name]-[chunkhash].css' : '[name].css'),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: "common",
+            filename: isProd ? "common-[chunkhash].js" : "common.js",
+            minChunks: Infinity
+        })
     ],
     devtool:"source-map"
 };
