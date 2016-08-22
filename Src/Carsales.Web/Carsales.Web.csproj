@@ -72,6 +72,10 @@
       <HintPath>..\packages\AutoMapper.5.1.1\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Bearded.Monads, Version=1.0.20.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Bearded.Monads.1.1.2\lib\NET451\Bearded.Monads.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Bolt.Cache, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Bolt.Cache.1.3.0.0\lib\net45\Bolt.Cache.dll</HintPath>
       <Private>True</Private>
@@ -106,6 +110,30 @@
     </Reference>
     <Reference Include="Bolt.Serializer.Json, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Bolt.Serializer.Json.1.0.0.1\lib\net45\Bolt.Serializer.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DataService.ClientLibrary, Version=42.0.191.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\dataservice.clientlibrary.42.0.191.0\lib\net46\DataService.ClientLibrary.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Expresso, Version=42.0.205.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Expresso.42.0.205.0\lib\net46\Expresso.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Expresso.Parser, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Expresso.Parser.42.0.192.0\lib\net46\Expresso.Parser.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FParsec, Version=1.0.0.0, Culture=neutral, PublicKeyToken=40ccfc0a09edbb5d, processorArchitecture=MSIL">
+      <HintPath>..\packages\FParsec.1.0.2\lib\net40-client\FParsec.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FParsecCS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=40ccfc0a09edbb5d, processorArchitecture=MSIL">
+      <HintPath>..\packages\FParsec.1.0.2\lib\net40-client\FParsecCS.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FSharp.Core, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FSharp.Core.3.1.2.1\lib\net40\FSharp.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -248,17 +276,20 @@
     <Compile Include="App_Start\ViewEngineSetupTask.cs" />
     <Compile Include="Features\Home\HomeController.cs" />
     <Compile Include="Features\Home\HomePageRequestedEvent.cs" />
+    <Compile Include="Features\Home\Makes\LoadMakesWithCountOnPageLoad.cs" />
+    <Compile Include="Features\Home\Makes\MakesViewModelItem.cs" />
+    <Compile Include="Features\Home\TotalStocks\TotalStocksLoadedEvent.cs" />
     <Compile Include="Features\Listings\ListingPageRequestedEvent.cs" />
     <Compile Include="Features\Listings\ListingQueryHandler.cs" />
     <Compile Include="Features\Listings\ListingsController.cs" />
     <Compile Include="Features\Listings\PopulateSavedStatusFilter.cs" />
     <Compile Include="Features\Shared\Proxies\ProxyEndpointSettings.cs" />
+    <Compile Include="Features\Shared\Proxies\RyvusApiProxy.cs" />
+    <Compile Include="Features\Shared\SavedCars\SavedCarsRenderExtensions.cs" />
     <Compile Include="Features\Shared\SavedCars\CurrentUserSavedCarsProvider.cs" />
-    <Compile Include="Features\Shared\SavedCars\IRequireSavedItems.cs" />
     <Compile Include="Features\Shared\SavedCars\LoadCurrentUserSavedCarsOnPageLoad.cs" />
     <Compile Include="Features\Shared\SavedCars\Api\SavedCarsApiController.cs" />
     <Compile Include="Features\Shared\SavedCars\SavedCarsController.cs" />
-    <Compile Include="Features\Shared\SavedCars\SavedItemsRenderExtensions.cs" />
     <Compile Include="Features\Shared\SiteNav\IRequireSiteNav.cs" />
     <Compile Include="Features\Shared\SiteNav\LoadSiteNavOnPageLoadEventHandler.cs" />
     <Compile Include="Features\Shared\SiteNav\SiteNavApiProxy.cs" />
@@ -275,7 +306,7 @@
     <Compile Include="Infrastructure\AssetMappers\AssetMapProvider.cs" />
     <Compile Include="Infrastructure\AssetMappers\InitAssetMapStartUpTask.cs" />
     <Compile Include="Infrastructure\Attributes\AutoBindAttribute.cs" />
-    <Compile Include="Infrastructure\Cache\CacheLife.cs" />
+    <Compile Include="Infrastructure\Cache\CacheProfile.cs" />
     <Compile Include="Infrastructure\Configs\Settings.cs" />
     <Compile Include="Infrastructure\Configs\SettingsHelper.cs" />
     <Compile Include="Infrastructure\ErrorSafeHelpers\ErrorSafeExecutor.cs" />
@@ -365,6 +396,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Features\Shared\SavedCars\Assets\Css\saved-cars.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Features\Home\Makes\Views\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

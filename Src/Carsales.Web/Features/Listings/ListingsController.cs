@@ -16,7 +16,7 @@ namespace Carsales.Web.Features.Listings
         }
 
         [HttpGet]
-        [Route("{make}/{model?}")]
+        [Route("{make}/{model?}", Name = "ListingsByMakeModel")]
         public async Task<ActionResult> Index(ListingsRequest request)
         {
             var vm = await bus.SendAsync<ListingsRequest, ListingViewModel>(request);
@@ -25,5 +25,11 @@ namespace Carsales.Web.Features.Listings
         }
     }
 
-    
+    public static class ListingsUrlExtensions
+    {
+        public static string Listings(this UrlHelper url, string make)
+        {
+            return url.RouteUrl("ListingsByMakeModel", new {Make = make});
+        }
+    }
 }

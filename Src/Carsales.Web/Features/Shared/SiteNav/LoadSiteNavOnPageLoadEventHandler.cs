@@ -30,7 +30,7 @@ namespace Carsales.Web.Features.Shared.SiteNav
         public async Task HandleAsync(TEvent eEvent)
         {
             if(!(eEvent is IRequireSiteNav)) return;
-            var vm = await cache.Profile(CacheLife.Aggressive)
+            var vm = await cache.Profile(CacheProfile.Aggressive)
                 .FetchAsync(LoadFromApi)
                 .CacheIf(x => x.TopNavHtml != MvcHtmlString.Empty)
                 .GetAsync(Key);

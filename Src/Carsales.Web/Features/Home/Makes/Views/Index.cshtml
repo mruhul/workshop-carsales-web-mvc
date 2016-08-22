@@ -1,0 +1,9 @@
+﻿@using Carsales.Web.Features.Listings
+@model IEnumerable<Carsales.Web.Features.Home.Makes.MakesViewModelItem>
+
+<ul class="makes-list">
+    @foreach (var item in Model)
+    {
+        <li><a href="@Url.Listings(item.Name)">@item.Name</a> <span>@item.Count</span></li>
+    }
+</ul>
