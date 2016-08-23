@@ -300,7 +300,6 @@
     <Compile Include="Features\Shared\SiteNav\SiteNavSettings.cs" />
     <Compile Include="Features\Shared\SiteNav\SiteNavViewModel.cs" />
     <Compile Include="Features\Shared\SiteNav\SiteNavViewModelExtensions.cs" />
-    <Compile Include="Features\Shared\SiteNav\SiteNavViewModelProvider.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

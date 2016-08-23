@@ -1,4 +1,5 @@
 using System.Web.Mvc;
+using Carsales.Web.Infrastructure.Stores;
 
 namespace Carsales.Web.Features.Shared.SiteNav
 {
@@ -6,7 +7,7 @@ namespace Carsales.Web.Features.Shared.SiteNav
     {
         public static SiteNavViewModel SiteNav(this HtmlHelper html)
         {
-            return DependencyResolver.Current.GetService<ISiteNavViewModelProvider>().Get();
+            return DependencyResolver.Current.GetService<IContextStore<SiteNavViewModel>>().Get();
         }
     }
 }

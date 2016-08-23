@@ -4,6 +4,7 @@ using Bolt.Cache;
 using Bolt.Cache.Extensions;
 using Bolt.RequestBus;
 using Carsales.Web.Infrastructure.Cache;
+using Carsales.Web.Infrastructure.Stores;
 using Carsales.Web.Infrastructure.UserContext;
 
 namespace Carsales.Web.Features.Shared.SiteNav
@@ -11,13 +12,13 @@ namespace Carsales.Web.Features.Shared.SiteNav
     public class LoadSiteNavOnPageLoadEventHandler<TEvent> : IAsyncEventHandler<TEvent> where TEvent : IEvent
     {
         private readonly ISiteNavApiProxy proxy;
-        private readonly ISiteNavViewModelProvider provider;
+        private readonly IContextStore<SiteNavViewModel> provider;
         private readonly ICacheStore cache;
         private readonly IUserContext userContext;
         private const string Key = "SiteNav";
 
-        public LoadSiteNavOnPageLoadEventHandler(ISiteNavApiProxy proxy, 
-            ISiteNavViewModelProvider provider,
+        public LoadSiteNavOnPageLoadEventHandler(ISiteNavApiProxy proxy,
+            IContextStore<SiteNavViewModel> provider,
             ICacheStore cache,
             IUserContext userContext)
         {
