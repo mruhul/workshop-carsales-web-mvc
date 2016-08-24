@@ -49,11 +49,13 @@ namespace Carsales.Web.Infrastructure.Stores
             value = default(T);
         }
         
+        [DebuggerStepThrough]
         public T Get()
         {
             return value;
         }
 
+        [DebuggerStepThrough]
         public void Set(T data)
         {
             this.value = data;
