@@ -287,6 +287,7 @@
     <Compile Include="Features\Listings\ListingQueryHandler.cs" />
     <Compile Include="Features\Listings\ListingsController.cs" />
     <Compile Include="Features\Listings\PopulateSavedStatusFilter.cs" />
+    <Compile Include="Features\Shared\Proxies\EditorialSearchApiProxy.cs" />
     <Compile Include="Features\Shared\Proxies\ProxyEndpointSettings.cs" />
     <Compile Include="Features\Shared\Proxies\RyvusApiProxy.cs" />
     <Compile Include="Features\Shared\SavedCars\SavedCarsRenderExtensions.cs" />

@@ -9,7 +9,7 @@ using Carsales.Web.Infrastructure.Configs;
 
 namespace Carsales.Web.Features.Shared.Proxies
 {
-    public class RyvusGetInput
+    public class EditorialSearchGetInput
     {
         public string Q { get; set; }
         public string Sl { get; set; }
@@ -17,27 +17,27 @@ namespace Carsales.Web.Features.Shared.Proxies
         public string Count { get; set; }
     }
 
-    public interface IRyvusApiProxy
+    public interface IEditorialSearchApiProxy
     {
-        Task<RestResponse<T>> GetAsync<T>(RyvusGetInput input);
+        Task<RestResponse<T>> GetAsync<T>(EditorialSearchGetInput input);
     }
 
     [AutoBind]
-    public class RyvusApiProxy : IRyvusApiProxy
+    public class EditorialSearchApiProxy : IEditorialSearchApiProxy
     {
         private readonly IRestClient restClient;
         private readonly ISettings<ProxyEndpointSettings> settings;
 
-        public RyvusApiProxy(IRestClient restClient, ISettings<ProxyEndpointSettings> settings)
+        public EditorialSearchApiProxy(IRestClient restClient, ISettings<ProxyEndpointSettings> settings)
         {
             this.restClient = restClient;
             this.settings = settings;
         }
 
-        public Task<RestResponse<T>> GetAsync<T>(RyvusGetInput input)
+        public Task<RestResponse<T>> GetAsync<T>(EditorialSearchGetInput input)
         {
-            var url = UrlBuilder.Host(settings.Value.CarSearch)
-                .Route("carlistingsubset/carsales")
+            var url = UrlBuilder.Host(settings.Value.EditorialSearch)
+                .Route("editoriallisting")
                 .QueryParams(input);
 
             return restClient.For(url)
