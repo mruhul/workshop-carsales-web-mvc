@@ -16,12 +16,12 @@ namespace Carsales.Web.Features.Home.Makes
     [AutoBind]
     public class LoadMakesWithCountOnPageLoad : IAsyncEventHandler<HomePageRequestedEvent>
     {
-        private readonly IRyvusApiProxy proxy;
+        private readonly ICarSearchApiProxy proxy;
         private readonly IContextStore<IEnumerable<MakesViewModelItem>> provider;
         private readonly ICacheStore cacheStore;
         private const string Key = "LoadMakesWithCountOnPageLoad:Count";
 
-        public LoadMakesWithCountOnPageLoad(IRyvusApiProxy proxy,
+        public LoadMakesWithCountOnPageLoad(ICarSearchApiProxy proxy,
             IContextStore<IEnumerable<MakesViewModelItem>> provider,
             ICacheStore cacheStore)
         {

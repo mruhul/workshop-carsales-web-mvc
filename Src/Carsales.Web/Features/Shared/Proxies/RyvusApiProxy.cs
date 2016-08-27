@@ -17,18 +17,18 @@ namespace Carsales.Web.Features.Shared.Proxies
         public string Count { get; set; }
     }
 
-    public interface IRyvusApiProxy
+    public interface ICarSearchApiProxy
     {
         Task<RestResponse<T>> GetAsync<T>(RyvusGetInput input);
     }
 
     [AutoBind]
-    public class RyvusApiProxy : IRyvusApiProxy
+    public class CarSearchApiProxy : ICarSearchApiProxy
     {
         private readonly IRestClient restClient;
         private readonly ISettings<ProxyEndpointSettings> settings;
 
-        public RyvusApiProxy(IRestClient restClient, ISettings<ProxyEndpointSettings> settings)
+        public CarSearchApiProxy(IRestClient restClient, ISettings<ProxyEndpointSettings> settings)
         {
             this.restClient = restClient;
             this.settings = settings;

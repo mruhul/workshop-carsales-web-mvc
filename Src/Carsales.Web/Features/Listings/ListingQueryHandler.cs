@@ -49,16 +49,16 @@ namespace Carsales.Web.Features.Listings
     public class ListingQueryHandler : AsyncRequestHandlerBase<ListingsRequest,ListingViewModel>
     {
         private readonly IRequestBus bus;
-        private readonly IRyvusApiProxy ryvusApiProxy;
+        private readonly ICarSearchApiProxy carSearchApiProxy;
         private readonly ILogger logger;
         private readonly ICodeProfiler codeProfiler;
 
         public ListingQueryHandler(IRequestBus bus, 
-            IRyvusApiProxy ryvusApiProxy,
+            ICarSearchApiProxy carSearchApiProxy,
             ILogger logger, ICodeProfiler codeProfiler)
         {
             this.bus = bus;
-            this.ryvusApiProxy = ryvusApiProxy;
+            this.carSearchApiProxy = carSearchApiProxy;
             this.logger = logger;
             this.codeProfiler = codeProfiler;
         }
@@ -93,7 +93,7 @@ namespace Carsales.Web.Features.Listings
         {
             using (codeProfiler.Start("LoadSearchResultByMakes"))
             {
-                return await ryvusApiProxy.GetAsync<RyvusSearchResponse>(new RyvusGetInput
+                return await carSearchApiProxy.GetAsync<RyvusSearchResponse>(new RyvusGetInput
                 {
                     Count = "true",
                     Q =
