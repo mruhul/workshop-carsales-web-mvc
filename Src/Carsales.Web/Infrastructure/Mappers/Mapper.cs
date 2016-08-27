@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Carsales.Web.Infrastructure.Attributes;
+﻿using Carsales.Web.Infrastructure.Attributes;
 
 namespace Carsales.Web.Infrastructure.Mappers
 {
@@ -11,7 +7,7 @@ namespace Carsales.Web.Infrastructure.Mappers
         TOutput Map<TOutput>(object input);
     }
 
-    [AutoBindSingleton]
+    [AutoBind]
     public class AutoMappedMapper : IMapper
     {
         public TOutput Map<TOutput>(object input)

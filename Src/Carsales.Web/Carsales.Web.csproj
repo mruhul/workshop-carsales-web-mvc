@@ -278,6 +278,9 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteSetupTask.cs" />
     <Compile Include="App_Start\ViewEngineSetupTask.cs" />
+    <Compile Include="Features\Details\DetailsController.cs" />
+    <Compile Include="Features\Details\DetailsPageRequestedEvent.cs" />
+    <Compile Include="Features\Details\DetailsQueryHandler.cs" />
     <Compile Include="Features\Home\HomeController.cs" />
     <Compile Include="Features\Home\HomePageRequestedEvent.cs" />
     <Compile Include="Features\Home\Makes\LoadMakesWithCountOnPageLoad.cs" />
@@ -287,6 +290,7 @@
     <Compile Include="Features\Listings\ListingQueryHandler.cs" />
     <Compile Include="Features\Listings\ListingsController.cs" />
     <Compile Include="Features\Listings\PopulateSavedStatusFilter.cs" />
+    <Compile Include="Features\Shared\Proxies\CarDetailsApiProxy.cs" />
     <Compile Include="Features\Shared\Proxies\EditorialSearchApiProxy.cs" />
     <Compile Include="Features\Shared\Proxies\ProxyEndpointSettings.cs" />
     <Compile Include="Features\Shared\Proxies\RyvusApiProxy.cs" />
@@ -315,7 +319,9 @@
     <Compile Include="Infrastructure\Configs\SettingsHelper.cs" />
     <Compile Include="Infrastructure\ErrorSafeHelpers\ErrorSafeExecutor.cs" />
     <Compile Include="Infrastructure\ErrorSafeHelpers\ErrorSafeResponse.cs" />
+    <Compile Include="Infrastructure\Mappers\IMappingSetupTask.cs" />
     <Compile Include="Infrastructure\Mappers\Mapper.cs" />
+    <Compile Include="Infrastructure\Mappers\SetupMappingStartUpTask.cs" />
     <Compile Include="Infrastructure\RestClientLog\LogBasedReportTimeTaken.cs" />
     <Compile Include="Infrastructure\StartupTasks\IStartupTask.cs" />
     <Compile Include="Infrastructure\Stores\ContextStore.cs" />
@@ -373,7 +379,9 @@
   <ItemGroup>
     <Content Include="typings.json" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Features\Details\Views\Index.cshtml" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Features\Home\Views\Index.cshtml" />
   </ItemGroup>

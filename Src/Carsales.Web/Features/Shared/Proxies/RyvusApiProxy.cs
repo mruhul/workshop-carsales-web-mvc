@@ -9,7 +9,7 @@ using Carsales.Web.Infrastructure.Configs;
 
 namespace Carsales.Web.Features.Shared.Proxies
 {
-    public class RyvusGetInput
+    public class CarSearchInput
     {
         public string Q { get; set; }
         public string Sl { get; set; }
@@ -19,7 +19,7 @@ namespace Carsales.Web.Features.Shared.Proxies
 
     public interface ICarSearchApiProxy
     {
-        Task<RestResponse<T>> GetAsync<T>(RyvusGetInput input);
+        Task<RestResponse<T>> GetAsync<T>(CarSearchInput input);
     }
 
     [AutoBind]
@@ -34,7 +34,7 @@ namespace Carsales.Web.Features.Shared.Proxies
             this.settings = settings;
         }
 
-        public Task<RestResponse<T>> GetAsync<T>(RyvusGetInput input)
+        public Task<RestResponse<T>> GetAsync<T>(CarSearchInput input)
         {
             var url = UrlBuilder.Host(settings.Value.CarSearch)
                 .Route("carlistingsubset/carsales")

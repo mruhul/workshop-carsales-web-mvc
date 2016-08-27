@@ -93,7 +93,7 @@ namespace Carsales.Web.Features.Listings
         {
             using (codeProfiler.Start("LoadSearchResultByMakes"))
             {
-                return await carSearchApiProxy.GetAsync<RyvusSearchResponse>(new RyvusGetInput
+                return await carSearchApiProxy.GetAsync<RyvusSearchResponse>(new CarSearchInput
                 {
                     Count = "true",
                     Q =

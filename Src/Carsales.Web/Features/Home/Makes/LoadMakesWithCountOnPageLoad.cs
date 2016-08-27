@@ -42,7 +42,7 @@ namespace Carsales.Web.Features.Home.Makes
 
         private async Task<IEnumerable<MakesViewModelItem>> LoadFromProxy()
         {
-            var response = await proxy.GetAsync<SelectListResponseDto>(new RyvusGetInput
+            var response = await proxy.GetAsync<SelectListResponseDto>(new CarSearchInput
             {
                 Sl = "Make||Grouped",
                 Count = "true"

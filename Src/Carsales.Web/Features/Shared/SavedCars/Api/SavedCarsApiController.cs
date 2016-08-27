@@ -36,22 +36,19 @@ namespace Carsales.Web.Features.Shared.SavedCars.Api
     [AutoBind]
     public class SavedCarListRequestHandler : AsyncRequestHandlerBase<SavedCarListRequest, IEnumerable<SavedCarItem>>
     {
-        private readonly IRestClient restClient;
-        private readonly ISettings<ProxyEndpointSettings> settings;
+        private readonly ICarDetailsApiProxy carDetailsApi;
 
-        public SavedCarListRequestHandler(IRestClient restClient, ISettings<ProxyEndpointSettings> settings)
+        public SavedCarListRequestHandler(ICarDetailsApiProxy carDetailsApi)
         {
-            this.restClient = restClient;
-            this.settings = settings;
+            this.carDetailsApi = carDetailsApi;
         }
 
         protected override async Task<IEnumerable<SavedCarItem>> ProcessAsync(SavedCarListRequest msg)
         {
-            var response = await 
-                restClient.For(UrlBuilder.Host(settings.Value.DataService).Route("items").QueryParam("ids", msg.Ids))
-                    .RetryOnFailure(1)
-                    .Timeout(TimeSpan.FromSeconds(1))
-                    .GetAsync<IEnumerable<dynamic>>();
+            var response = await carDetailsApi.GetAsync<IEnumerable<dynamic>>(new CarDetailsInput
+            {
+                Ids = msg.Ids
+            });
 
             return response.Output?.Select(x => new SavedCarItem
             {

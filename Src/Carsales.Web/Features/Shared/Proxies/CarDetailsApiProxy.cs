@@ -9,35 +9,33 @@ using Carsales.Web.Infrastructure.Configs;
 
 namespace Carsales.Web.Features.Shared.Proxies
 {
-    public class EditorialSearchInput
+    public class CarDetailsInput
     {
-        public string Q { get; set; }
-        public string Sl { get; set; }
-        public string Sr { get; set; }
-        public string Count { get; set; }
+        public string Ids { get; set; }
+        public string Projection { get; set; }
     }
 
-    public interface IEditorialSearchApiProxy
+    public interface ICarDetailsApiProxy
     {
-        Task<RestResponse<T>> GetAsync<T>(EditorialSearchInput input);
+        Task<RestResponse<T>> GetAsync<T>(CarDetailsInput input);
     }
 
     [AutoBind]
-    public class EditorialSearchApiProxy : IEditorialSearchApiProxy
+    public class CarDetailsApiProxy : ICarDetailsApiProxy
     {
         private readonly IRestClient restClient;
         private readonly ISettings<ProxyEndpointSettings> settings;
 
-        public EditorialSearchApiProxy(IRestClient restClient, ISettings<ProxyEndpointSettings> settings)
+        public CarDetailsApiProxy(IRestClient restClient, ISettings<ProxyEndpointSettings> settings)
         {
             this.restClient = restClient;
             this.settings = settings;
         }
 
-        public Task<RestResponse<T>> GetAsync<T>(EditorialSearchInput input)
+        public Task<RestResponse<T>> GetAsync<T>(CarDetailsInput input)
         {
-            var url = UrlBuilder.Host(settings.Value.EditorialSearch)
-                .Route("editoriallisting")
+            var url = UrlBuilder.Host(settings.Value.CarDetails)
+                .Route("items")
                 .QueryParams(input);
 
             return restClient.For(url)
