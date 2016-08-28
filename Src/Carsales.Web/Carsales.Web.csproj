@@ -384,9 +384,6 @@
     <Content Include="typings.json" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Features\Details\Views\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Features\Home\Views\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -418,6 +415,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Features\Details\RelatedArticles\Views\Index.cshtml" />
+    <Content Include="Features\Details\Views\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
