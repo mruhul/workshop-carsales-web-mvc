@@ -29,6 +29,9 @@ namespace Carsales.Web.Features.Details
         public string Photo { get; set; }
         public double? Price { get; set; }
         public string PriceType { get; set; }
+        public string Make { get; set; }
+        public string Model { get; set; }
+        public string Badge { get; set; }
     }
 
     public class CarDetailLoadedEvent : IEvent
@@ -39,6 +42,7 @@ namespace Carsales.Web.Features.Details
         public string Make { get; set; }
         public string Model { get; set; }
         public string Year { get; set; }
+        public string Badge { get; set; }
     }
 
     [AutoBind]
@@ -81,7 +85,7 @@ namespace Carsales.Web.Features.Details
             var response = await apiProxy.GetAsync<IEnumerable<DetailsApiDto>>(new CarDetailsInput
             {
                 Ids = id,
-                Projection = "title:Specification.Title,photo:Media.Photos[0].PhotoPath"
+                Projection = "title:Specification.Title,photo:Media.Photos[0].PhotoPath,make:Specification.Make,model:Specification.Model,badge:Specification.Badge"
             });
 
             var dto = response.Output?.FirstOrDefault();

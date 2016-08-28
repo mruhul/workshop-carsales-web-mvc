@@ -58,10 +58,4 @@ namespace Carsales.Web.Features.Home.Makes
                 .OrderBy(x => x.Name);
         }
     }
-
-    public class SelectListResponseDto
-    {
-        public int Count { get; set; }
-        public SelectListCollection SelectListCollection { get; set; }
-    }
 }

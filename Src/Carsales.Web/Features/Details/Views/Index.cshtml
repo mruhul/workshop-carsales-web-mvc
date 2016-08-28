@@ -1,4 +1,7 @@
-﻿@model Carsales.Web.Features.Details.DetailsViewModel
+﻿@using Carsales.Web.Features.Details.RelatedArticles
+@model Carsales.Web.Features.Details.DetailsViewModel
 <div class="container">
     <h1>@Model.Title</h1>
+
+    @{ Html.RenderActionForRelatedArticles(); }
 </div>

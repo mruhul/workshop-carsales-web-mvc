@@ -7,7 +7,7 @@ namespace Carsales.Web.Infrastructure.Mappers
         TOutput Map<TOutput>(object input);
     }
 
-    [AutoBind]
+    [AutoBindSingleton]
     public class AutoMappedMapper : IMapper
     {
         public TOutput Map<TOutput>(object input)

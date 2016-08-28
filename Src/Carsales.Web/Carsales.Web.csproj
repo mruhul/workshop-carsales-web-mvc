@@ -281,6 +281,9 @@
     <Compile Include="Features\Details\DetailsController.cs" />
     <Compile Include="Features\Details\DetailsPageRequestedEvent.cs" />
     <Compile Include="Features\Details\DetailsQueryHandler.cs" />
+    <Compile Include="Features\Details\RelatedArticles\LoadRelatedArticlesOnCarDetailsLoaded.cs" />
+    <Compile Include="Features\Details\RelatedArticles\RelatedArticlesController.cs" />
+    <Compile Include="Features\Details\RelatedArticles\RelatedArticlesRenderActionExtensions.cs" />
     <Compile Include="Features\Home\HomeController.cs" />
     <Compile Include="Features\Home\HomePageRequestedEvent.cs" />
     <Compile Include="Features\Home\Makes\LoadMakesWithCountOnPageLoad.cs" />
@@ -293,7 +296,8 @@
     <Compile Include="Features\Shared\Proxies\CarDetailsApiProxy.cs" />
     <Compile Include="Features\Shared\Proxies\EditorialSearchApiProxy.cs" />
     <Compile Include="Features\Shared\Proxies\ProxyEndpointSettings.cs" />
-    <Compile Include="Features\Shared\Proxies\RyvusApiProxy.cs" />
+    <Compile Include="Features\Shared\Proxies\CarSearchApiProxy.cs" />
+    <Compile Include="Features\Shared\Proxies\SearchResponseDto.cs" />
     <Compile Include="Features\Shared\SavedCars\SavedCarsRenderExtensions.cs" />
     <Compile Include="Features\Shared\SavedCars\CurrentUserSavedCarsProvider.cs" />
     <Compile Include="Features\Shared\SavedCars\LoadCurrentUserSavedCarsOnPageLoad.cs" />
@@ -411,6 +415,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Features\Home\Makes\Views\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Features\Details\RelatedArticles\Views\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
