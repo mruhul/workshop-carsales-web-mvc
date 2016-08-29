@@ -11,27 +11,26 @@ using Bolt.RestClient.Extensions;
 using Carsales.Web.Features.Shared.Proxies;
 using Carsales.Web.Infrastructure.Attributes;
 using Carsales.Web.Infrastructure.Configs;
+using Carsales.Web.Infrastructure.Stores;
 using Carsales.Web.Infrastructure.UserContext;
 
 namespace Carsales.Web.Features.Shared.SavedCars
 {
-    public interface IRequireSavedItems { }
-
     public class LoadCurrentUserSavedCarsOnPageLoad<TEvent> : IAsyncEventHandler<TEvent> where TEvent : IEvent
     {
         private readonly IRestClient restClient;
-        private readonly ICurrentUserSavedCarsProvider provider;
+        private readonly IContextStore<CurrentUserSavedCarIds> context;
         private readonly IUserContext userContext;
         private readonly ISettings<ProxyEndpointSettings> settings;
         private readonly ICodeProfiler codeProfiler;
 
         public LoadCurrentUserSavedCarsOnPageLoad(IRestClient restClient, 
-            ICurrentUserSavedCarsProvider provider,
+            IContextStore<CurrentUserSavedCarIds> context,
             IUserContext userContext,
             ISettings<ProxyEndpointSettings> settings, ICodeProfiler codeProfiler)
         {
             this.restClient = restClient;
-            this.provider = provider;
+            this.context = context;
             this.userContext = userContext;
             this.settings = settings;
             this.codeProfiler = codeProfiler;
@@ -55,7 +54,10 @@ namespace Carsales.Web.Features.Shared.SavedCars
                 .GetAsync<SavedItemsApiResponse>();
 
 
-                provider.Set(response.Output?.Items?.Select(x => x.AdDetails.NetworkId));
+                context.Set(new CurrentUserSavedCarIds
+                {
+                    Value = response.Output?.Items?.Select(x => x.AdDetails.NetworkId)
+                });
             }
             
         }

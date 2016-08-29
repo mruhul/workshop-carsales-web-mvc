@@ -298,8 +298,9 @@
     <Compile Include="Features\Shared\Proxies\ProxyEndpointSettings.cs" />
     <Compile Include="Features\Shared\Proxies\CarSearchApiProxy.cs" />
     <Compile Include="Features\Shared\Proxies\SearchResponseDto.cs" />
+    <Compile Include="Features\Shared\SavedCars\CurrentUserSavedCarIds.cs" />
+    <Compile Include="Features\Shared\SavedCars\IRequireSavedItems.cs" />
     <Compile Include="Features\Shared\SavedCars\SavedCarsRenderExtensions.cs" />
-    <Compile Include="Features\Shared\SavedCars\CurrentUserSavedCarsProvider.cs" />
     <Compile Include="Features\Shared\SavedCars\LoadCurrentUserSavedCarsOnPageLoad.cs" />
     <Compile Include="Features\Shared\SavedCars\Api\SavedCarsApiController.cs" />
     <Compile Include="Features\Shared\SavedCars\SavedCarsController.cs" />
